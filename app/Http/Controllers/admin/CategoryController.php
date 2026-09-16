@@ -66,7 +66,7 @@ class CategoryController extends Controller
         // Returning json response
         return response()->json([
             'status' => 200,
-            'categories' => $category
+            'data' => $category
         ]);
     }
 
