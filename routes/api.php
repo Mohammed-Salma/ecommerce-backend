@@ -9,7 +9,9 @@ use App\Http\Controllers\admin\TempImageController;
 use App\Http\Controllers\front\AccountController;
 use App\Http\Controllers\front\OrderController;
 use App\Http\Controllers\admin\OrderController as AdminOrderController;
+use App\Http\Controllers\admin\ShippingController;
 use App\Http\Controllers\front\ProductController as FrontProductController;
+use App\Http\Controllers\front\ShippingController as FrontShippingController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +24,7 @@ Route::get('get-products', [FrontProductController::class, 'getProducts']);
 Route::get('get-product/{id}', [FrontProductController::class, 'getProduct']);
 Route::post('register', [AccountController::class, 'register']);
 Route::post('login', [AccountController::class, 'authenticate']);
+Route::get('get-shipping-front', [FrontShippingController::class, 'getShipping']);
 
 Route::group(['middleware' => ['auth:sanctum', 'checkUserRole']], function () {
     Route::post('save-order', [OrderController::class, 'saveOrder']);
@@ -54,4 +57,7 @@ Route::group(['middleware' => ['auth:sanctum', 'checkAdminRole']], function () {
     Route::get('orders', [AdminOrderController::class, 'index']);
     Route::get('orders/{id}', [AdminOrderController::class, 'detail']);
     Route::post('update-order/{id}', [AdminOrderController::class, 'updateOrder']);
+
+    Route::get('get-shipping', [ShippingController::class, 'getShipping']);
+    Route::post('save-shipping', [ShippingController::class, 'updateShipping']);
 });
